@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haluk Kayhan Business Card</title>
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        body {
+            background: #eee;
+        }
+
+        .card {
+            border: none;
+
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .card:before {
+
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background-color: #8ed9f7;
+            transform: scaleY(1);
+            transition: all 0.5s;
+            transform-origin: bottom
+        }
+
+        .card:after {
+
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background-color: #2c6ce4;
+            transform: scaleY(0);
+            transition: all 0.5s;
+            transform-origin: bottom
+        }
+
+        .card:hover::after {
+            transform: scaleY(1);
+        }
+
+
+        .fonts {
+            font-size: 16px;
+        }
+
+        .social-list {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .social-list li {
+            padding: 10px;
+            color: #2c6ce4;
+            font-size: 19px;
+        }
+
+
+        .buttons button:nth-child(1) {
+            border: 1px solid #2c6ce4 !important;
+            background-color: #2c6ce4;
+            color: #fff;
+            height: 40px;
+        }
+
+
+
+        .buttons button:nth-child(2) {
+            border: 1px solid #2c6ce4 !important;
+            background-color: #2c6ce4;
+            color: #fff;
+            height: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+
+        <div class="row d-flex justify-content-center">
+
+            <div class="col-md-7">
+
+                <div class="card p-3 py-4">
+
+                    <div class="text-center">
+                        <img src="profile.jpg" width="190" class="rounded-circle">
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <span class="bg-primary p-1 px-4 rounded text-white">Prime Travel</span>
+
+                        <h5 class="mt-1 mb-0">Haluk Kayhan</h5>
+
+                        <span>Managing Director</span>
+                        <hr>
+
+                        <h5 class="mt-4 mb-0">Phone</h5>
+                        <span>+905334265381</span>
+
+                        <h5 class="mt-2 mb-0">Email</h5>
+                        <a target="_blank" style="color:black"
+                            href="https://google.com.tr">h.kayhan@primetravel.com.tr</a>
+
+                        <h5 class="mt-2 mb-0">Address</h5>
+                        <span></span>
+                        <a target="_blank" style="color:black" href="https://google.com.tr"> Şirinyalı Mah. Lara Cad.
+                            1539 sok. Atahan Apt. Kat:2 D:10 Muratpaşa/Antalya, Türkiye </a>
+                        <hr>
+                        <div class="px-4 mt-4">
+                            <p class="fonts">About About About About About About About About About About About About
+                                About About About</p>
+
+                        </div>
+
+                        <div class="buttons">
+
+
+                            <button id="downloadEl" class="btn btn-primary px-4 ms-3">Save To Phone</button>
+                        </div>
+
+
+                        <ul class="social-list">
+
+                            <li><i class="fa fa-instagram"></i></li>
+                            <li><i class="fa fa-linkedin"></i></li>
+
+                        </ul>
+
+
+
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+ 
+    <script>
+        'use strict';
+
+        function downloadToFile(content, filename, contentType) {
+            const a = document.createElement('a');
+            const file = new Blob([content], { type: contentType });
+
+            a.href = URL.createObjectURL(file);
+            a.download = filename;
+            a.click();
+
+            URL.revokeObjectURL(a.href);
+        }
+
+        // function previewFile(event) {
+        //   let reader = new FileReader();
+        //   let file = event.target.files[0];
+
+        //   reader.readAsDataURL(file);
+        //   reader.onloadend = () => (previewEl.src = reader.result);
+        // }
+
+        const makeVCardVersion = () => `VERSION:3.0`;
+        const makeVCardInfo = (info) => `N:${info}`;
+        const makeVCardName = (name) => `FN:${name}`;
+        const makeVCardOrg = (org) => `ORG:${org}`;
+        const makeVCardTitle = (title) => `TITLE:${title}`;
+        const makeVCardTel = (phone) => `TEL;TYPE=WORK,VOICE:${phone}`;
+        const makeVCardAdr = (address) => `ADR;TYPE=WORK,PREF:;;${address}`;
+        const makeVCardEmail = (email) => `EMAIL:${email}`;
+        const makeVCardTimeStamp = () => `REV:${new Date().toISOString()}`;
+
+        function makeVCard() {
+            let vcard = `BEGIN:VCARD
+${makeVCardVersion()}
+${makeVCardInfo("Haluk Kayhan")}
+${makeVCardName("Haluk Kayhan")}
+${makeVCardOrg("Prime Travel")}
+${makeVCardTitle("Managing Director")}
+
+${makeVCardTel("+905334265381")}
+${makeVCardAdr("Şirinyalı Mah. Lara Cad. 1539 sok. Atahan Apt. Kat:2 D:10 Muratpaşa/Antalya, Türkiye")}
+${makeVCardEmail("h.kayhan@primetravel.com.tr")}
+${makeVCardTimeStamp()}
+END:VCARD`;
+            downloadToFile(vcard, 'vcard.vcf', 'text/vcard');
+        }
+
+        downloadEl.addEventListener('click', makeVCard);
+        // fileEl.addEventListener('change', previewFile);
+
+    </script>
+</body>
+
+</html>
